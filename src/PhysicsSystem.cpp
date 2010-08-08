@@ -27,7 +27,7 @@ PhysicsSystem& PhysicsSystem::setup() {
 		.setVisc(0.00015)
 		.setColorDiffusion(0);
 	fluidDrawer.setup(&fluidSolver);
-	fluidDrawer.setDrawMode(FLUID_DRAW_VECTORS);
+	fluidDrawer.setDrawMode(MSA::kFluidDrawVectors);
 }
 
 void PhysicsSystem::update() {
@@ -78,24 +78,24 @@ void PhysicsSystem::addToFluid(float x, float y, float dx, float dy, bool addCol
         float colorMult = 50;
         float velocityMult = 30;
 		
-        int index = fluidSolver.getIndexForNormalizedPosition(x, y);
+        int index = fluidSolver.getIndexForPos(MSA::Vec2f(x, y));
 		
 		if(addColor) {
 			msaColor drawColor;
 			int hue = lroundf((x + y) * 180 + ofGetFrameNum()) % 360;
 			drawColor.setHSV(hue, 1, 1);
 			
-			fluidSolver.r[index]  += drawColor.r * colorMult;
-			fluidSolver.g[index]  += drawColor.g * colorMult;
-			fluidSolver.b[index]  += drawColor.b * colorMult;
+			fluidSolver.color[index].x  += drawColor.r * colorMult;//r
+			fluidSolver.color[index].y  += drawColor.g * colorMult;//g
+			fluidSolver.color[index].z  += drawColor.b * colorMult;//b
 			
 			if(settings.drawParticles)
 				particleSystem.addParticles(x * myApp->window.width, y * myApp->window.height, 10);
 		}
 		
 		if(addForce) {
-			fluidSolver.u[index] += dx * velocityMult;
-			fluidSolver.v[index] += dy * velocityMult;
+			fluidSolver.uv[index].x += dx * velocityMult;
+			fluidSolver.uv[index].y += dy * velocityMult;
 		}
 		
 		if(!settings.drawFluid && ofGetFrameNum()%5 ==0)

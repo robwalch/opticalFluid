@@ -34,9 +34,9 @@ void Particle::update() {
 	if(alpha == 0) return;
 	
 	// read fluid info and add to velocity
-	int fluidIndex = myApp->physicsSystem.fluidSolver.getIndexForNormalizedPosition(x * myApp->window.invWidth, y * myApp->window.invHeight);
-	vx = myApp->physicsSystem.fluidSolver.u[fluidIndex] * myApp->window.width * mass * FLUID_FORCE + vx * MOMENTUM;
-	vy = myApp->physicsSystem.fluidSolver.v[fluidIndex] * myApp->window.height * mass * FLUID_FORCE + vy * MOMENTUM;
+	int fluidIndex = myApp->physicsSystem.fluidSolver.getIndexForPos(MSA::Vec2f(x * myApp->window.invWidth, y * myApp->window.invHeight));
+	vx = myApp->physicsSystem.fluidSolver.uv[fluidIndex].x * myApp->window.width * mass * FLUID_FORCE + vx * MOMENTUM;
+	vy = myApp->physicsSystem.fluidSolver.uv[fluidIndex].y * myApp->window.height * mass * FLUID_FORCE + vy * MOMENTUM;
 	
 //	color.r = myApp->fluidSolver.r[fluidIndex] + 0.5;
 //	color.g = myApp->fluidSolver.g[fluidIndex] + 0.5;

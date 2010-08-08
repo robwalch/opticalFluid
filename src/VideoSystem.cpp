@@ -137,9 +137,9 @@ void VideoSystem::update() {
 					y = cornersImg[i].y/VIDEO_HEIGHT;
 					dx = x - cornersPrev[i].x/VIDEO_WIDTH;
 					dy = y - cornersPrev[i].y/VIDEO_HEIGHT;
-					myApp->physicsSystem.fluidSolver.addForceAtPos(x, y,
-																   dx*settings.dv_scale,
-																   dy*settings.dv_scale);
+					myApp->physicsSystem.fluidSolver.addForceAtPos(MSA::Vec2f(x, y),
+																   MSA::Vec2f(dx*settings.dv_scale,
+																			  dy*settings.dv_scale));
 				}
 			} 
 			IplImage* swp_pyr = pyrPrev;

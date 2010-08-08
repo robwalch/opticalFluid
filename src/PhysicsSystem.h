@@ -3,7 +3,7 @@
 #include "ofMain.h"
 
 #include "settings.h"
-#include "ofxMSAFluid.h"
+#include "MSAFluid.h"
 #include "ParticleSystem.h"
 #include "Particle.h"
 #include "msaColor.h"
@@ -30,8 +30,8 @@ public:
 	
 	void addToFluid(float x, float y, float dx, float dy, bool addColor = true, bool addForce = true);
 
-	ofxMSAFluidSolver	fluidSolver;
-	ofxMSAFluidDrawer	fluidDrawer;	
+	MSA::FluidSolver	fluidSolver;
+	MSA::FluidDrawerGl	fluidDrawer;	
 
 	ParticleSystem		particleSystem;
 
